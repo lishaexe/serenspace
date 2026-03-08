@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 const features = [
-  { icon: '🌷', title: 'Daily Affirmations', desc: 'Positive affirmations for focus, confidence, anxiety and exam stress. A new reminder of your strength every day.' },
-  { icon: '🍥', title: 'Breathing Exercises', desc: 'Box breathing, 4-7-8, and deep breathing techniques. Visualised with smooth, calming animations.' },
-  { icon: '💌', title: 'Mood Journal', desc: 'Track how you feel each day with emoji check-ins and brief reflections. Spot patterns over time.' },
-  { icon: '🎧', title: 'Focus Timer', desc: 'Pomodoro-style timer to help you study smarter. Work in focused sprints, rest with intention.' },
-  { icon: '🧸', title: 'Progress Streaks', desc: 'Stay consistent with daily streaks and session counts. Small habits compound into lasting calm.' },
-  { icon: '🍰', title: 'Made for Students', desc: 'Designed around exam seasons, late nights, and the very real pressure of college stress.' },
+  { icon: '🌷', title: 'Daily Affirmations', desc: 'Positive affirmations for focus, confidence.' },
+  { icon: '🍥', title: 'Breathing Exercises', desc: 'Box breathing and deep breathing techniques.' },
+  { icon: '💌', title: 'Mood Journal', desc: 'Track how you feel each day with emoji check-ins.' },
+  { icon: '🎧', title: 'Focus Timer', desc: 'Timer to help you study smarter.' },
+  { icon: '🧸', title: 'Progress Streaks', desc: 'Stay consistent with daily session counts.' },
+  { icon: '🍰', title: 'Made for Students', desc: 'Designed for exam seasons.' },
 ]
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } }
@@ -83,15 +83,7 @@ export default function Landing() {
             }}>in the chaos 🌷</span>
           </h1>
 
-          <motion.p
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
-            style={{
-              fontSize: '1.05rem', color: '#8c7fa0',
-              fontWeight: 300, maxWidth: 420,
-              margin: '0 auto 52px', lineHeight: 1.7,
-            }}>
-            ˚ A mindfulness companion for students navigating stress, exams, and everything in between ˚
-          </motion.p>
+          
 
           <motion.div
             initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
@@ -116,12 +108,9 @@ export default function Landing() {
             fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 400,
             color: '#2d2538', lineHeight: 1.2, marginBottom: 12,
           }}>
-            Everything you need to <em>feel better</em> 🍰
+            Everything you need to <em>feel better</em> 
           </h2>
-          <p style={{ color: '#8c7fa0', fontSize: '0.9rem', maxWidth: 380, margin: '0 auto' }}>
-            ˚ Simple tools that help when deadlines pile up ˚
-          </p>
-        </motion.div>
+          </motion.div>
 
         <motion.div
           variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}
@@ -150,17 +139,13 @@ export default function Landing() {
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           style={{ textAlign: 'center', marginTop: 72 }}>
-          <p style={{ fontSize: '1.2rem', color: '#c0b4d0', marginBottom: 16, letterSpacing: '0.1em' }}>
-            ⋆｡°✩ ˚ ༘ ♡
-          </p>
-          <p style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '1.8rem', fontStyle: 'italic', color: '#2d2538', marginBottom: 24 }}>
-            Ready to begin? 🌷
-          </p>
+         
+          
           <Link to="/signup" className="btn-primary" style={{ padding: '14px 36px', fontSize: '0.95rem' }}>
-            ✨ Create your free account
+             Create your free account
           </Link>
           <p style={{ marginTop: 24, fontSize: '0.78rem', color: '#c0b4d0', letterSpacing: '0.1em' }}>
-            🐇 free forever · 💌 no spam · 🧸 just calm
+             🍓just calm
           </p>
         </motion.div>
       </section>
