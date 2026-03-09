@@ -15,8 +15,8 @@ const app = express();
 app.use(cors({
   origin: ['http://localhost:5173', 'https://serenspace-zeta.vercel.app'],
   credentials: true
-}))
-
+}));
+app.use(express.json());
 /* Routes */
 app.use("/api/auth", authRoutes);
 app.use("/api/sessions", sessionRoutes);
