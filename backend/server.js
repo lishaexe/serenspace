@@ -12,8 +12,10 @@ dotenv.config();
 const app = express();
 
 /* Middleware */
-app.use(cors({ origin: "http://localhost:5173" }));
-app.use(express.json());
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://serenspace-zeta.vercel.app'],
+  credentials: true
+}))
 
 /* Routes */
 app.use("/api/auth", authRoutes);
