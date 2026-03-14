@@ -46,14 +46,7 @@ export default function About() {
           </div>
         </div>
 
-        {/* Built by */}
-        <div className="glass-card" style={{ padding: '32px', marginBottom: 40 }}>
-          <h2 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '1.6rem', color: '#2d2538', marginBottom: 16 }}>Built by</h2>
-          <p style={{ color: '#8c7fa0', lineHeight: 1.8 }}>
-            SerenSpace was designed and developed by <strong style={{ color: '#2d2538' }}>Ananya</strong> and <strong style={{ color: '#2d2538' }}>Lisha</strong> as a BCA Final Year Project (2026). Ananya handled the frontend design and React development, while Lisha built the backend with Node.js, Express, and MongoDB.
-          </p>
-        </div>
-
+        
         <Link to="/" className="btn-primary">← Back to Home</Link>
       </motion.div>
     </div>
