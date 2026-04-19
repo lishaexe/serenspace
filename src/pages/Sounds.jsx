@@ -7,9 +7,9 @@ const SOUNDS = [
     emoji: '🌫️',
     color: 'rgba(200,232,248,0.4)',
     tracks: [
-      { name: 'Pure White Noise', emoji: '⬜', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' },
-      { name: 'Pink Noise', emoji: '🌸', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' },
-      { name: 'Brown Noise', emoji: '🟫', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3' },
+      { name: 'Pure White Noise', emoji: '⬜', url: 'https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3' },
+      { name: 'Pink Noise', emoji: '🌸', url: 'https://assets.mixkit.co/active_storage/sfx/2867/2867-preview.mp3' },
+      { name: 'Fan Noise', emoji: '🌀', url: 'https://assets.mixkit.co/active_storage/sfx/2868/2868-preview.mp3' },
     ]
   },
   {
@@ -17,10 +17,10 @@ const SOUNDS = [
     emoji: '🌧️',
     color: 'rgba(167,139,202,0.15)',
     tracks: [
-      { name: 'Gentle Rain', emoji: '🌦️', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3' },
-      { name: 'Heavy Rain', emoji: '⛈️', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3' },
-      { name: 'Ocean Waves', emoji: '🌊', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3' },
-      { name: 'River Stream', emoji: '🏞️', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3' },
+      { name: 'Gentle Rain', emoji: '🌦️', url: 'https://assets.mixkit.co/active_storage/sfx/2515/2515-preview.mp3' },
+      { name: 'Heavy Rain', emoji: '⛈️', url: 'https://assets.mixkit.co/active_storage/sfx/2516/2516-preview.mp3' },
+      { name: 'Ocean Waves', emoji: '🌊', url: 'https://assets.mixkit.co/active_storage/sfx/2517/2517-preview.mp3' },
+      { name: 'River Stream', emoji: '🏞️', url: 'https://assets.mixkit.co/active_storage/sfx/2518/2518-preview.mp3' },
     ]
   },
   {
@@ -28,9 +28,10 @@ const SOUNDS = [
     emoji: '🌿',
     color: 'rgba(212,240,228,0.4)',
     tracks: [
-      { name: 'Forest Birds', emoji: '🐦', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3' },
-      { name: 'Crickets Night', emoji: '🦗', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3' },
-      { name: 'Wind in Trees', emoji: '🍃', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3' },
+      { name: 'Forest Birds', emoji: '🐦', url: 'https://assets.mixkit.co/active_storage/sfx/2519/2519-preview.mp3' },
+      { name: 'Crickets Night', emoji: '🦗', url: 'https://assets.mixkit.co/active_storage/sfx/2520/2520-preview.mp3' },
+      { name: 'Wind in Trees', emoji: '🍃', url: 'https://assets.mixkit.co/active_storage/sfx/2521/2521-preview.mp3' },
+      { name: 'Thunderstorm', emoji: '⚡', url: 'https://assets.mixkit.co/active_storage/sfx/2522/2522-preview.mp3' },
     ]
   },
   {
@@ -38,20 +39,20 @@ const SOUNDS = [
     emoji: '🎵',
     color: 'rgba(252,224,236,0.4)',
     tracks: [
-      { name: 'Lo-fi Beats', emoji: '🎧', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3' },
-      { name: 'Calm Piano', emoji: '🎹', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3' },
-      { name: 'Deep Focus', emoji: '🔮', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3' },
-      { name: 'Ambient Chill', emoji: '✨', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3' },
+      { name: 'Lo-fi Beats', emoji: '🎧', url: 'https://assets.mixkit.co/music/preview/mixkit-dreaming-big-31.mp3' },
+      { name: 'Calm Piano', emoji: '🎹', url: 'https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3' },
+      { name: 'Deep Focus', emoji: '🔮', url: 'https://assets.mixkit.co/music/preview/mixkit-relaxing-in-nature-522.mp3' },
+      { name: 'Ambient Chill', emoji: '✨', url: 'https://assets.mixkit.co/music/preview/mixkit-valley-sunset-127.mp3' },
     ]
   },
   {
-    category: 'Cafe & Urban',
+    category: 'Cafe & Cozy',
     emoji: '☕',
     color: 'rgba(232,223,248,0.4)',
     tracks: [
-      { name: 'Coffee Shop', emoji: '☕', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3' },
-      { name: 'Library Ambience', emoji: '📚', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' },
-      { name: 'Fireplace', emoji: '🔥', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' },
+      { name: 'Coffee Shop', emoji: '☕', url: 'https://assets.mixkit.co/music/preview/mixkit-a-very-happy-christmas-897.mp3' },
+      { name: 'Fireplace', emoji: '🔥', url: 'https://assets.mixkit.co/active_storage/sfx/2523/2523-preview.mp3' },
+      { name: 'Library Ambience', emoji: '📚', url: 'https://assets.mixkit.co/music/preview/mixkit-life-is-a-dream-837.mp3' },
     ]
   },
 ]
@@ -80,7 +81,7 @@ export default function Sounds() {
     const audio = new Audio(track.url)
     audio.loop = true
     audio.volume = volume
-    audio.play()
+    audio.play().catch(() => {})
     audioRef.current = audio
     setPlaying(track)
   }
@@ -215,8 +216,7 @@ export default function Sounds() {
                       {isPlaying ? '⏸' : '▶'}
                     </div>
                     {isPlaying && (
-                      <motion.div
-                        style={{ display: 'flex', justifyContent: 'center', gap: 3, marginTop: 8 }}>
+                      <motion.div style={{ display: 'flex', justifyContent: 'center', gap: 3, marginTop: 8 }}>
                         {[0,1,2,3].map(i => (
                           <motion.div key={i}
                             animate={{ height: ['4px', '14px', '4px'] }}
