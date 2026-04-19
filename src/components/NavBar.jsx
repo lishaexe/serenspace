@@ -42,7 +42,8 @@ export default function NavBar() {
               { path: '/library',   label: 'Affirmations' },
               { path: '/breathe',   label: 'Breathe' },
               { path: '/journal',   label: 'Journal' },
-              { path: '/timer',     label: 'Focus' },
+              { path: '/timer',  label: 'Focus' },
+              { path: '/sounds', label: 'Sounds' },
             ].map(({ path, label }) => (
               <Link key={path} to={path} style={{
                 padding: '7px 14px', borderRadius: 50,

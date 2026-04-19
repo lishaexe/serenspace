@@ -16,6 +16,7 @@ import Breathe   from './pages/Breathe'
 import Journal   from './pages/Journal'
 import Timer     from './pages/Timer'
 import About     from './pages/About'
+import Sounds from './pages/Sounds'
 
 function AppContent() {
   const { user } = useAuth()
@@ -27,6 +28,7 @@ function AppContent() {
         <Route path="/login"     element={<Login />} />
         <Route path="/signup"    element={<Signup />} />
         <Route path="/about"     element={<About />} />
+        <Route path="/sounds" element={<ProtectedRoute><Sounds /></ProtectedRoute>} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/library"   element={<ProtectedRoute><Library /></ProtectedRoute>} />
         <Route path="/breathe"   element={<ProtectedRoute><Breathe /></ProtectedRoute>} />

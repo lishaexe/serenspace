@@ -165,12 +165,13 @@ export default function MindfulnessAssistant() {
 
   return (
     <>
+      {/* Floating button — bottom right next to FAB */}
       <motion.button
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         onClick={openAssistant}
         style={{
-          position: 'fixed', bottom: 32, left: 32, zIndex: 998,
+          position: 'fixed', bottom: 32, right: 100, zIndex: 998,
           width: 52, height: 52, borderRadius: '50%',
           background: 'linear-gradient(135deg, #c4a0d8, #a78bca)',
           border: 'none', cursor: 'pointer',
@@ -181,6 +182,7 @@ export default function MindfulnessAssistant() {
         🧘
       </motion.button>
 
+      {/* Chat panel — bigger, bottom right */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -188,8 +190,8 @@ export default function MindfulnessAssistant() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             style={{
-              position: 'fixed', bottom: 96, left: 32, zIndex: 998,
-              width: 320, maxHeight: 480,
+              position: 'fixed', bottom: 96, right: 32, zIndex: 998,
+              width: 380, maxHeight: 560,
               background: 'rgba(255,255,255,0.96)',
               backdropFilter: 'blur(24px)',
               borderRadius: 24,
@@ -199,18 +201,19 @@ export default function MindfulnessAssistant() {
               overflow: 'hidden',
             }}>
 
+            {/* Header */}
             <div style={{
-              padding: '16px 20px',
+              padding: '18px 22px',
               background: 'linear-gradient(135deg, #a78bca, #c4a0d8)',
               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <span style={{ fontSize: '1.3rem' }}>🧘</span>
+                <span style={{ fontSize: '1.4rem' }}>🧘</span>
                 <div>
-                  <p style={{ fontSize: '0.88rem', fontWeight: 600, color: 'white' }}>Mindfulness Assistant</p>
+                  <p style={{ fontSize: '0.92rem', fontWeight: 600, color: 'white' }}>Mindfulness Assistant</p>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#a8e6cf' }} />
-                    <p style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.8)' }}>
+                    <p style={{ fontSize: '0.74rem', color: 'rgba(255,255,255,0.8)' }}>
                       {mood ? 'Last mood: ' + mood : 'Ready to help'}
                     </p>
                   </div>
@@ -218,23 +221,25 @@ export default function MindfulnessAssistant() {
               </div>
               <button onClick={() => setOpen(false)} style={{
                 background: 'rgba(255,255,255,0.2)', border: 'none',
-                borderRadius: '50%', width: 28, height: 28,
-                cursor: 'pointer', color: 'white', fontSize: '0.85rem',
+                borderRadius: '50%', width: 30, height: 30,
+                cursor: 'pointer', color: 'white', fontSize: '0.9rem',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>x</button>
             </div>
 
-            <div style={{ flex: 1, overflowY: 'auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {/* Messages */}
+            <div style={{ flex: 1, overflowY: 'auto', padding: '18px', display: 'flex', flexDirection: 'column', gap: 12 }}>
               {messages.map(msg => (
                 <motion.div key={msg.id}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   style={{ display: 'flex', flexDirection: 'column', alignItems: msg.type === 'user' ? 'flex-end' : 'flex-start' }}>
                   <div style={{
-                    maxWidth: '85%', padding: '10px 14px',
+                    maxWidth: '85%', padding: '11px 15px',
                     borderRadius: msg.type === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
                     background: msg.type === 'user' ? 'linear-gradient(135deg, #a78bca, #c4a0d8)' : 'rgba(167,139,202,0.08)',
                     color: msg.type === 'user' ? 'white' : '#2d2538',
-                    fontSize: '0.84rem', lineHeight: 1.5,
+                    fontSize: '0.86rem', lineHeight: 1.55,
                   }}>
                     {msg.text}
                   </div>
@@ -245,10 +250,10 @@ export default function MindfulnessAssistant() {
                       transition={{ delay: 0.2 }}
                       onClick={() => { navigate(msg.action.path); setOpen(false) }}
                       style={{
-                        marginTop: 6, padding: '6px 14px',
+                        marginTop: 7, padding: '7px 16px',
                         background: 'linear-gradient(135deg, #a78bca, #c4a0d8)',
                         border: 'none', borderRadius: 50,
-                        fontSize: '0.78rem', fontWeight: 600, color: 'white',
+                        fontSize: '0.8rem', fontWeight: 600, color: 'white',
                         cursor: 'pointer', fontFamily: '"DM Sans", sans-serif',
                       }}>{msg.action.label}</motion.button>
                   )}
@@ -263,11 +268,12 @@ export default function MindfulnessAssistant() {
               <div ref={messagesEndRef} />
             </div>
 
-            <div style={{ padding: '10px 16px', borderTop: '1px solid rgba(167,139,202,0.1)' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 8 }}>
+            {/* Quick replies */}
+            <div style={{ padding: '12px 18px', borderTop: '1px solid rgba(167,139,202,0.1)' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 }}>
                 {QUICK_REPLIES.map(r => (
                   <button key={r} onClick={() => handleUserReply(r)} style={{
-                    padding: '5px 12px', borderRadius: 50, fontSize: '0.75rem',
+                    padding: '6px 14px', borderRadius: 50, fontSize: '0.76rem',
                     background: 'rgba(167,139,202,0.1)',
                     border: '1px solid rgba(167,139,202,0.2)',
                     color: '#6b4f8a', cursor: 'pointer',
@@ -276,10 +282,10 @@ export default function MindfulnessAssistant() {
                 ))}
               </div>
               <button onClick={askMore} style={{
-                width: '100%', padding: '9px', borderRadius: 12,
+                width: '100%', padding: '10px', borderRadius: 12,
                 background: 'rgba(167,139,202,0.08)',
                 border: '1px solid rgba(167,139,202,0.15)',
-                fontSize: '0.8rem', color: '#8c7fa0',
+                fontSize: '0.82rem', color: '#8c7fa0',
                 cursor: 'pointer', fontFamily: '"DM Sans", sans-serif',
               }}>Ask me something else</button>
             </div>
