@@ -5,6 +5,7 @@ import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import FAB from './components/FAB'
 import SmartReminder from './components/SmartReminder'
+import MindfulnessAssistant from './components/MindfulnessAssistant'
 import ProtectedRoute from './components/ProtectedRoute'
 import Landing   from './pages/Landing'
 import Login     from './pages/Login'
@@ -36,6 +37,7 @@ function AppContent() {
       <Footer />
       {user && <FAB />}
       {user && <SmartReminder />}
+      {user && <MindfulnessAssistant />}
     </>
   )
 }
