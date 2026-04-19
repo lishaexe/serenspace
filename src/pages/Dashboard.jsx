@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useAuth } from '../context/AuthContext'
 import { useState, useEffect } from 'react'
+import StreakCelebration from '../components/StreakCelebration'
 
 const quotes = [
   { text: "You don't have to control your thoughts. You just have to stop letting them control you.", author: 'Dan Millman' },
@@ -37,10 +38,7 @@ function MindfulnessScore({ score }) {
         <motion.div
           initial={{ width: 0 }} animate={{ width: `${score}%` }}
           transition={{ delay: 0.5, duration: 1, ease: 'easeOut' }}
-          style={{
-            height: '100%', borderRadius: 50,
-            background: 'linear-gradient(90deg, #a78bca, #c4a0d8)',
-          }} />
+          style={{ height: '100%', borderRadius: 50, background: 'linear-gradient(90deg, #a78bca, #c4a0d8)' }} />
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8 }}>
         <p style={{ fontSize: '0.72rem', color: '#c0b4d0' }}>0</p>
@@ -53,11 +51,11 @@ function MindfulnessScore({ score }) {
   )
 }
 
-function SmartBanner({ message, emoji, color }) {
+function SmartBanner({ message, emoji }) {
   return (
     <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
       style={{
-        background: color || 'linear-gradient(135deg, rgba(167,139,202,0.15), rgba(252,224,236,0.2))',
+        background: 'linear-gradient(135deg, rgba(167,139,202,0.15), rgba(252,224,236,0.2))',
         border: '1px solid rgba(167,139,202,0.2)',
         borderRadius: 16, padding: '14px 20px', marginBottom: 28,
         display: 'flex', alignItems: 'center', gap: 12,
@@ -81,6 +79,8 @@ export default function Dashboard() {
   const [smartMessage, setSmartMessage] = useState(null)
   const [mindfulnessScore, setMindfulnessScore] = useState(0)
   const [topMood, setTopMood] = useState(null)
+  const [showCelebration, setShowCelebration] = useState(false)
+  const prevStreak = parseInt(localStorage.getItem('seren_streak') || '0')
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -104,6 +104,12 @@ export default function Dashboard() {
           }
         }
 
+        // Streak celebration
+        if (streak > prevStreak && streak > 0) {
+          setShowCelebration(true)
+          localStorage.setItem('seren_streak', streak)
+        }
+
         // Top mood
         if (Array.isArray(journalData) && journalData.length > 0) {
           const counts = {}
@@ -111,24 +117,20 @@ export default function Dashboard() {
           const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1])
           if (sorted.length) setTopMood({ label: sorted[0][0], count: sorted[0][1] })
 
-          // Smart message based on recent moods
+          // Smart message
           const recent = journalData.slice(0, 5)
           const stressCount = recent.filter(e => ['Stressed','Worried','Low'].includes(e.moodLabel)).length
-          const happyCount = recent.filter(e => ['Happy','Peaceful','Energised'].includes(e.moodLabel)).length
+          const happyCount  = recent.filter(e => ['Happy','Peaceful','Energised'].includes(e.moodLabel)).length
           if (stressCount >= 2) {
-            setSmartMessage({ message: `You've been feeling stressed lately, ${firstName}. A breathing session might help 🌿`, emoji: '💙', action: '/breathe' })
+            setSmartMessage({ message: `You've been feeling stressed lately, ${firstName}. A breathing session might help 🌿`, emoji: '💙' })
           } else if (happyCount >= 3) {
-            setSmartMessage({ message: `You've been in a great mood lately, ${firstName}! Keep the momentum going 🔥`, emoji: '🌟', action: null })
-          } else if (journalCount === 0) {
-            setSmartMessage({ message: `Start your wellness journey today, ${firstName}! Write your first journal entry 📔`, emoji: '🌱', action: '/journal' })
+            setSmartMessage({ message: `You've been in a great mood lately, ${firstName}! Keep the momentum going 🔥`, emoji: '🌟' })
           }
         } else {
-          setSmartMessage({ message: `Welcome to SerenSpace, ${firstName}! Start by writing your first journal entry 🌱`, emoji: '🌿', action: '/journal' })
+          setSmartMessage({ message: `Welcome to SerenSpace, ${firstName}! Start by writing your first journal entry 🌱`, emoji: '🌿' })
         }
 
         const sessions = user?.totalSessions || 0
-
-        // Mindfulness score (0-100)
         const journalScore = Math.min(journalCount * 10, 40)
         const sessionScore = Math.min(sessions * 5, 30)
         const streakScore  = Math.min(streak * 5, 30)
@@ -159,6 +161,12 @@ export default function Dashboard() {
   return (
     <div style={{ maxWidth: 1100, margin: '0 auto', padding: '100px 24px 80px', position: 'relative', zIndex: 1 }}>
 
+      <StreakCelebration
+        streak={stats.streak}
+        show={showCelebration}
+        onDone={() => setShowCelebration(false)}
+      />
+
       {/* Smart greeting */}
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 24 }}>
         <p className="section-label" style={{ marginBottom: 6 }}>{greeting}</p>
@@ -173,9 +181,7 @@ export default function Dashboard() {
       </motion.div>
 
       {/* Smart banner */}
-      {smartMessage && (
-        <SmartBanner message={smartMessage.message} emoji={smartMessage.emoji} />
-      )}
+      {smartMessage && <SmartBanner message={smartMessage.message} emoji={smartMessage.emoji} />}
 
       {/* Mindfulness score */}
       {!loading && <MindfulnessScore score={mindfulnessScore} />}
@@ -186,7 +192,7 @@ export default function Dashboard() {
         {[
           { label: 'Current Streak',  value: loading ? '...' : stats.streak,        unit: stats.streak ? 'days 🔥' : 'Start journaling! 📔', color: '#fce0ec' },
           { label: 'Focus Sessions',  value: loading ? '...' : stats.totalSessions,  unit: stats.totalSessions ? 'pomodoros ⏱️' : 'Try a session!', color: '#e8dff8' },
-          { label: 'Time Practiced',  value: loading ? '...' : stats.timePracticed,  unit: stats.timePracticed > 0 ? 'hours total' : 'Start breathing! 🌿', color: '#c8e8f8' },
+          { label: 'Time Practiced',  value: loading ? '...' : stats.timePracticed,  unit: Number(stats.timePracticed) > 0 ? 'hours total' : 'Start breathing! 🌿', color: '#c8e8f8' },
           { label: 'Journal Entries', value: loading ? '...' : stats.journalEntries, unit: stats.journalEntries ? 'check-ins 📔' : 'Write today! 🌷', color: '#d4f0e4' },
         ].map(s => (
           <motion.div key={s.label} variants={fadeItem} className="glass-card"

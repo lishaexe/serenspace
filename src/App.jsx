@@ -4,6 +4,7 @@ import { ThemeProvider } from './context/ThemeContext'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import FAB from './components/FAB'
+import SmartReminder from './components/SmartReminder'
 import ProtectedRoute from './components/ProtectedRoute'
 import Landing   from './pages/Landing'
 import Login     from './pages/Login'
@@ -34,6 +35,7 @@ function AppContent() {
       </Routes>
       <Footer />
       {user && <FAB />}
+      {user && <SmartReminder />}
     </>
   )
 }

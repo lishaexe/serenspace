@@ -25,18 +25,14 @@ const MOOD_SUGGESTIONS = {
   'Low':       { message: "Daily affirmations can help shift your mindset 💜", action: 'View Affirmations', path: '/library', color: '#e8dff8' },
   'Stressed':  { message: "You seem stressed 😟 Box breathing for 2 minutes can really help.", action: 'Try Breathing', path: '/breathe', color: '#fce0ec' },
 }
-
-const MOCK_ENTRIES = [
-  { mood: '😌', moodLabel: 'Peaceful',  reflection: 'Felt calm after the morning meditation. Exam prep going okay.', createdAt: '2026-02-27' },
-  { mood: '😤', moodLabel: 'Stressed',  reflection: 'Stressed about the upcoming test but did box breathing — helped.', createdAt: '2026-02-26' },
-  { mood: '😊', moodLabel: 'Happy',     reflection: 'Really good day overall. 25 min focus session felt great.', createdAt: '2026-02-25' },
-]
+const MOCK_ENTRIES = []
 
 const MOCK_CHART = [
-  { day: 'Mon', mood: 3 }, { day: 'Tue', mood: 4 },
-  { day: 'Wed', mood: 2 }, { day: 'Thu', mood: 5 },
-  { day: 'Fri', mood: 3 }, { day: 'Sat', mood: 4 }, { day: 'Sun', mood: 5 },
+  { day: 'Mon', mood: 0 }, { day: 'Tue', mood: 0 },
+  { day: 'Wed', mood: 0 }, { day: 'Thu', mood: 0 },
+  { day: 'Fri', mood: 0 }, { day: 'Sat', mood: 0 }, { day: 'Sun', mood: 0 },
 ]
+
 
 const CustomDot = (props) => {
   const { cx, cy } = props
