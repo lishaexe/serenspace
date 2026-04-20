@@ -7,10 +7,10 @@ const BREAK_SECS = 5 * 60
 const CIRCUM     = 2 * Math.PI * 110
 
 const TRACKS = [
-  { name: 'Lofi Study Beats', emoji: '🎵', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' },
-  { name: 'Calm Piano', emoji: '🎹', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' },
-  { name: 'Nature Sounds', emoji: '🌿', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3' },
-  { name: 'Deep Focus', emoji: '🔮', url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3' },
+  { name: 'Lo-fi Beats', emoji: '🎧', videoId: 'jfKfPfyJRdk' },
+  { name: 'Calm Piano', emoji: '🎹', videoId: 'UfcAVejslrU' },
+  { name: 'Study Music', emoji: '📚', videoId: 'lTRiuFIWV54' },
+  { name: 'Jazz Cafe', emoji: '🎷', videoId: 'Dx5qFachd3A' },
 ]
 
 export default function Timer() {
@@ -20,54 +20,11 @@ export default function Timer() {
   const [running, setRunning]   = useState(false)
   const [sessions, setSessions] = useState([])
   const [toast, setToast]       = useState('')
-
-  // Music
-  const [musicOn, setMusicOn]       = useState(false)
-  const [trackIdx, setTrackIdx]     = useState(0)
-  const [volume, setVolume]         = useState(0.4)
+  const [musicOn, setMusicOn]   = useState(false)
+  const [trackIdx, setTrackIdx] = useState(0)
   const [musicExpanded, setMusicExpanded] = useState(false)
-  const audioRef                    = useRef(null)
-  const intervalRef                 = useRef(null)
-  const total                       = mode === 'work' ? WORK_SECS : BREAK_SECS
-
-  // Audio setup
-  useEffect(() => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio(TRACKS[trackIdx].url)
-      audioRef.current.loop = true
-      audioRef.current.volume = volume
-    }
-    return () => {
-      audioRef.current?.pause()
-    }
-  }, [])
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume
-    }
-  }, [volume])
-
-  const playTrack = (idx) => {
-    setTrackIdx(idx)
-    if (audioRef.current) {
-      audioRef.current.pause()
-      audioRef.current = new Audio(TRACKS[idx].url)
-      audioRef.current.loop = true
-      audioRef.current.volume = volume
-      if (musicOn) audioRef.current.play()
-    }
-  }
-
-  const toggleMusic = () => {
-    if (musicOn) {
-      audioRef.current?.pause()
-      setMusicOn(false)
-    } else {
-      audioRef.current?.play()
-      setMusicOn(true)
-    }
-  }
+  const intervalRef = useRef(null)
+  const total = mode === 'work' ? WORK_SECS : BREAK_SECS
 
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(''), 2800) }
 
@@ -85,10 +42,10 @@ export default function Timer() {
   useEffect(() => {
     if (timeLeft === 0) {
       if (mode === 'work') {
-        showToast('Focus session done! Take a break 🌿')
+        showToast('Focus session done! Take a break')
         logSession()
       } else {
-        showToast('Break over. Back to focus! ✦')
+        showToast('Break over. Back to focus!')
       }
     }
   }, [timeLeft])
@@ -168,17 +125,15 @@ export default function Timer() {
         <svg width="260" height="260" style={{ transform: 'rotate(-90deg)' }}>
           <defs>
             <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%"   stopColor="#a78bca" />
+              <stop offset="0%" stopColor="#a78bca" />
               <stop offset="100%" stopColor="#c4a0d8" />
             </linearGradient>
           </defs>
           <circle cx="130" cy="130" r="110" fill="none" stroke="rgba(167,139,202,0.12)" strokeWidth="8" />
           <motion.circle
             cx="130" cy="130" r="110"
-            fill="none"
-            stroke="url(#timerGrad)"
-            strokeWidth="8"
-            strokeLinecap="round"
+            fill="none" stroke="url(#timerGrad)"
+            strokeWidth="8" strokeLinecap="round"
             strokeDasharray={CIRCUM}
             animate={{ strokeDashoffset: offset }}
             transition={{ duration: 0.9, ease: 'linear' }}
@@ -213,7 +168,6 @@ export default function Timer() {
         className="glass-card-static"
         style={{ width: '100%', padding: '20px 24px', marginBottom: 32, borderRadius: 20 }}>
 
-        {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: musicExpanded ? 16 : 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <motion.span
@@ -224,26 +178,36 @@ export default function Timer() {
             </motion.span>
             <div>
               <p style={{ fontSize: '0.88rem', fontWeight: 600, color: '#2d2538' }}>Study Music</p>
-              <p style={{ fontSize: '0.75rem', color: '#8c7fa0' }}>{musicOn ? `Playing: ${TRACKS[trackIdx].name}` : 'Off'}</p>
+              <p style={{ fontSize: '0.75rem', color: '#8c7fa0' }}>{musicOn ? 'Playing: ' + TRACKS[trackIdx].name : 'Off'}</p>
             </div>
           </div>
           <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-            <button onClick={toggleMusic} style={{
+            <button onClick={() => setMusicOn(o => !o)} style={{
               background: musicOn ? 'linear-gradient(135deg, #a78bca, #c4a0d8)' : 'rgba(167,139,202,0.12)',
               border: 'none', borderRadius: 50, padding: '8px 18px',
               fontSize: '0.82rem', fontWeight: 600,
               color: musicOn ? 'white' : '#a78bca',
               cursor: 'pointer', fontFamily: '"DM Sans", sans-serif',
-            }}>{musicOn ? '⏸ Pause' : '▶ Play'}</button>
+            }}>{musicOn ? 'Pause' : 'Play'}</button>
             <button onClick={() => setMusicExpanded(o => !o)} style={{
               background: 'rgba(167,139,202,0.1)', border: 'none',
               borderRadius: 50, width: 32, height: 32,
               cursor: 'pointer', color: '#8c7fa0', fontSize: '0.8rem',
-            }}>{musicExpanded ? '▲' : '▼'}</button>
+            }}>{musicExpanded ? 'v' : '+'}</button>
           </div>
         </div>
 
-        {/* Expanded */}
+        {/* Hidden YouTube iframe */}
+        {musicOn && (
+          <iframe
+            key={TRACKS[trackIdx].videoId}
+            width="0" height="0"
+            src={`https://www.youtube.com/embed/${TRACKS[trackIdx].videoId}?autoplay=1&loop=1&playlist=${TRACKS[trackIdx].videoId}&controls=0`}
+            allow="autoplay; encrypted-media"
+            style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}
+          />
+        )}
+
         <AnimatePresence>
           {musicExpanded && (
             <motion.div
@@ -252,11 +216,10 @@ export default function Timer() {
               exit={{ opacity: 0, height: 0 }}
               style={{ overflow: 'hidden' }}>
 
-              {/* Track list */}
-              <p style={{ fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8c7fa0', marginBottom: 10 }}>Choose Track</p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 16 }}>
+              <p style={{ fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8c7fa0', marginBottom: 10, marginTop: 16 }}>Choose Track</p>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                 {TRACKS.map((t, i) => (
-                  <button key={i} onClick={() => playTrack(i)} style={{
+                  <button key={i} onClick={() => setTrackIdx(i)} style={{
                     padding: '10px 14px', borderRadius: 12,
                     border: `1.5px solid ${trackIdx === i ? '#a78bca' : 'transparent'}`,
                     background: trackIdx === i ? 'rgba(167,139,202,0.12)' : 'rgba(255,255,255,0.5)',
@@ -268,18 +231,6 @@ export default function Timer() {
                     <span style={{ fontSize: '0.78rem', fontWeight: trackIdx === i ? 600 : 400, color: trackIdx === i ? '#a78bca' : '#2d2538' }}>{t.name}</span>
                   </button>
                 ))}
-              </div>
-
-              {/* Volume */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                <span style={{ fontSize: '0.75rem', color: '#8c7fa0' }}>🔈</span>
-                <input
-                  type="range" min="0" max="1" step="0.05"
-                  value={volume}
-                  onChange={e => setVolume(parseFloat(e.target.value))}
-                  style={{ flex: 1, accentColor: '#a78bca', cursor: 'pointer' }}
-                />
-                <span style={{ fontSize: '0.75rem', color: '#8c7fa0' }}>🔊</span>
               </div>
             </motion.div>
           )}
