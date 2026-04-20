@@ -10,7 +10,6 @@ const SOUNDS = [
       { name: 'Pure White Noise', emoji: '⬜', videoId: 'nMfPqeZjc2c' },
       { name: 'Brown Noise', emoji: '🟫', videoId: 'RqzGzwTY-6w' },
       { name: 'Pink Noise', emoji: '🌸', videoId: 'ZXtimhT-ff4' },
-      { name: 'Fan Noise', emoji: '🌀', videoId: 'WcLVHCKmGnI' },
     ]
   },
   {
@@ -21,8 +20,6 @@ const SOUNDS = [
       { name: 'Gentle Rain', emoji: '🌦️', videoId: 'mPZkdNFkNps' },
       { name: 'Heavy Rain', emoji: '⛈️', videoId: 'q76bMs-NwRk' },
       { name: 'Ocean Waves', emoji: '🌊', videoId: 'bn9F19Hi1Lk' },
-      { name: 'River Stream', emoji: '🏞️', videoId: 'BcRSeEFlHD4' },
-      { name: 'Rain on Window', emoji: '🪟', videoId: 'gEWzxHoZPJo' },
     ]
   },
   {
@@ -31,10 +28,7 @@ const SOUNDS = [
     color: 'rgba(212,240,228,0.4)',
     tracks: [
       { name: 'Forest Birds', emoji: '🐦', videoId: 'Qm846KdZN_c' },
-      { name: 'Crickets Night', emoji: '🦗', videoId: 'bLOjBGjBA-k' },
-      { name: 'Wind in Trees', emoji: '🍃', videoId: 'H-iYeoXRNPQ' },
       { name: 'Thunderstorm', emoji: '⚡', videoId: 'nDq6TstdEi8' },
-      { name: 'Jungle Sounds', emoji: '🌴', videoId: 'yIQd2Ya0Ziw' },
     ]
   },
   {
@@ -45,7 +39,6 @@ const SOUNDS = [
       { name: 'Lo-fi Beats', emoji: '🎧', videoId: 'jfKfPfyJRdk' },
       { name: 'Calm Piano', emoji: '🎹', videoId: 'UfcAVejslrU' },
       { name: 'Study Music', emoji: '📚', videoId: 'lTRiuFIWV54' },
-      { name: 'Ambient Chill', emoji: '✨', videoId: '4oStw0r33so' },
       { name: 'Jazz Cafe', emoji: '🎷', videoId: 'Dx5qFachd3A' },
     ]
   },
@@ -54,7 +47,6 @@ const SOUNDS = [
     emoji: '☕',
     color: 'rgba(232,223,248,0.4)',
     tracks: [
-      { name: 'Coffee Shop', emoji: '☕', videoId: 'h2zkV-l_more' },
       { name: 'Fireplace', emoji: '🔥', videoId: 'L_LUpnjgPso' },
       { name: 'Library Ambience', emoji: '📖', videoId: 'xNN7iTA57jM' },
       { name: 'Rainy Cafe', emoji: '🌧️', videoId: 'BHACKCNDMW8' },
@@ -88,7 +80,7 @@ export default function Sounds() {
         <p style={{ color: '#8c7fa0', fontSize: '0.9rem' }}>Background sounds to help you focus, relax, and sleep better.</p>
       </motion.div>
 
-      {/* Now playing bar - audio only, no video */}
+      {/* Now playing bar */}
       <AnimatePresence>
         {playing && (
           <motion.div
@@ -99,7 +91,7 @@ export default function Sounds() {
               background: 'linear-gradient(135deg, #a78bca, #c4a0d8)',
               borderRadius: 20, padding: '18px 24px', marginBottom: 24,
               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              flexWrap: 'wrap', gap: 12,
+              flexWrap: 'wrap', gap: 12, position: 'relative',
             }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
               <motion.span
@@ -112,7 +104,6 @@ export default function Sounds() {
                 <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.7)', marginBottom: 2 }}>Now Playing</p>
                 <p style={{ fontSize: '1rem', fontWeight: 600, color: 'white' }}>{playing.name}</p>
               </div>
-              {/* Animated sound bars */}
               <div style={{ display: 'flex', gap: 3, alignItems: 'flex-end', height: 20 }}>
                 {[0,1,2,3,4].map(i => (
                   <motion.div key={i}
@@ -132,12 +123,11 @@ export default function Sounds() {
                 fontFamily: '"DM Sans", sans-serif', fontWeight: 500,
               }}>Stop</button>
 
-            {/* Hidden iframe - audio only */}
+            {/* Hidden audio iframe */}
             <iframe
               key={playing.videoId}
-              width="0"
-              height="0"
-              src={`https://www.youtube.com/embed/${playing.videoId}?autoplay=1&loop=1&playlist=${playing.videoId}&controls=0&modestbranding=1`}
+              width="0" height="0"
+              src={`https://www.youtube.com/embed/${playing.videoId}?autoplay=1&loop=1&playlist=${playing.videoId}&controls=0`}
               allow="autoplay; encrypted-media"
               style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}
             />
