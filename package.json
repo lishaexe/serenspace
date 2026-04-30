@@ -9,11 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "framer-motion": "^11.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.0",
-    "framer-motion": "^11.0.0",
-    "recharts": "^2.12.0"
+    "react-tsparticles": "^2.12.2",
+    "recharts": "^2.12.0",
+    "tsparticles": "^3.9.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.0",
