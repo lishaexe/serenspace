@@ -44,6 +44,7 @@ export default function NavBar() {
               { path: '/journal',   label: 'Journal' },
               { path: '/timer',  label: 'Focus' },
               { path: '/sounds', label: 'Sounds' },
+              { path: '/habits', label: 'Habits' },
             ].map(({ path, label }) => (
               <Link key={path} to={path} style={{
                 padding: '7px 14px', borderRadius: 50,

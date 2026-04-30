@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
 import sessionRoutes from "./routes/sessions.js";
 import journalRoutes from "./routes/journal.js";
+import habitRoutes from './routes/habits.js'
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/sessions", sessionRoutes);
 app.use("/api/journal", journalRoutes);
+app.use('/api/habits', habitRoutes)
 
 /* Test route */
 app.get("/", (req, res) => {

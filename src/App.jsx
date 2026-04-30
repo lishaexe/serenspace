@@ -17,6 +17,7 @@ import Journal   from './pages/Journal'
 import Timer     from './pages/Timer'
 import About     from './pages/About'
 import Sounds from './pages/Sounds'
+import Habits from './pages/Habits'
 
 function AppContent() {
   const { user } = useAuth()
@@ -35,6 +36,7 @@ function AppContent() {
         <Route path="/journal"   element={<ProtectedRoute><Journal /></ProtectedRoute>} />
         <Route path="/timer"     element={<ProtectedRoute><Timer /></ProtectedRoute>} />
         <Route path="*"          element={<Navigate to="/" replace />} />
+        <Route path="/habits" element={<ProtectedRoute><Habits /></ProtectedRoute>} />
       </Routes>
       <Footer />
       {user && <FAB />}

@@ -1,8 +1,5 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import Particles, { initParticlesEngine } from '@tsparticles/react'
-import { loadSlim } from '@tsparticles/slim'
-import { useCallback, useEffect, useState } from 'react'
 
 const features = [
   { icon: '🌷', title: 'Daily Affirmations', desc: 'Positive affirmations for focus, confidence.' },
@@ -17,62 +14,8 @@ const container = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } }
 const item = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.5 } } }
 
 export default function Landing() {
-  const [init, setInit] = useState(false)
-
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine)
-    }).then(() => setInit(true))
-  }, [])
-
-  const particlesLoaded = useCallback(async () => {}, [])
-
   return (
     <div style={{ position: 'relative', zIndex: 1 }}>
-
-      {/* Particles */}
-      {init && (
-        <Particles
-          id="tsparticles"
-          particlesLoaded={particlesLoaded}
-          options={{
-            fullScreen: { enable: false },
-            background: { color: { value: 'transparent' } },
-            fpsLimit: 60,
-            particles: {
-              number: { value: 40, density: { enable: true, area: 800 } },
-              color: { value: ['#a78bca', '#c4a0d8', '#fce0ec', '#c8e8f8', '#d4f0e4'] },
-              shape: { type: 'circle' },
-              opacity: { value: 0.4, random: true, animation: { enable: true, speed: 0.5, minimumValue: 0.1 } },
-              size: { value: 3, random: true, animation: { enable: true, speed: 1, minimumValue: 0.5 } },
-              move: {
-                enable: true, speed: 0.6, direction: 'none',
-                random: true, straight: false, outModes: 'out',
-              },
-              links: {
-                enable: true, distance: 120, color: '#a78bca',
-                opacity: 0.15, width: 1,
-              },
-            },
-            interactivity: {
-              events: {
-                onHover: { enable: true, mode: 'repulse' },
-                onClick: { enable: true, mode: 'push' },
-              },
-              modes: {
-                repulse: { distance: 80, duration: 0.4 },
-                push: { quantity: 2 },
-              },
-            },
-            detectRetina: true,
-          }}
-          style={{
-            position: 'fixed', top: 0, left: 0,
-            width: '100%', height: '100%',
-            zIndex: 0, pointerEvents: 'none',
-          }}
-        />
-      )}
 
       {/* Hero */}
       <section style={{
